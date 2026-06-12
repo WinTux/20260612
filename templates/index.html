@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Ventas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background: #f0f0f0;
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 700px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Reporte de Ventas</h1>
+
+    <h3>
+        Producto más vendido:
+        {{ producto_top }} ({{ unidades_top }} unidades)
+    </h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Unidades Vendidas</th>
+                <th>Ingresos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in resumen %}
+            <tr>
+                <td>{{ item.producto }}</td>
+                <td>{{ item.unidades_vendidas }}</td>
+                <td>${{ item.ingresos }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Gráfico</h2>
+
+    <img src="{{ url_for('static', filename='reporte_ingresos.png') }}"
+         alt="Reporte de ingresos">
+
+</body>
+</html>
